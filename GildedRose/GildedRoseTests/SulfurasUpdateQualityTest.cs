@@ -11,7 +11,7 @@ public class SulfurasUpdateQualityTest
     [Test]
     public void NeverHasToBeSold()
     {
-        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80, new DefaultQualityHandler(), new DefaultSellInHandler());
+        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80, new NeverDegradesQualityHandler(), new NeverSellInHandler(), 80);
         
         GildedRose.UpdateQuality(new List<Item> {sulfuras});
         
@@ -20,7 +20,7 @@ public class SulfurasUpdateQualityTest
     
     [Test]
     public void NeverDecreasesQuality() {
-        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80, new DefaultQualityHandler(), new DefaultSellInHandler());
+        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80, new NeverDegradesQualityHandler(), new NeverSellInHandler(), 80);
         
         GildedRose.UpdateQuality(new List<Item> {sulfuras});
         

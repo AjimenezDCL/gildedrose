@@ -10,9 +10,11 @@ public class Item
     private int quality;
     private readonly IQualityHandler qualityHandler;
     private readonly ISellInHandler sellInHandler;
+    private readonly int maxQualityAllowed;
 
-    public Item(string name, int sellIn, int quality, IQualityHandler qualityHandler, ISellInHandler sellInHandler)
+    public Item(string name, int sellIn, int quality, IQualityHandler qualityHandler, ISellInHandler sellInHandler, int maxQualityAllowed = 50)
     {
+        this.maxQualityAllowed = maxQualityAllowed;
         this.name = name;
         SetSellIn(sellIn);
         SetQuality(quality);
@@ -38,7 +40,7 @@ public class Item
 
     public void SetQuality(int quality)
     {
-        this.quality = Math.Max(0, quality);
+        this.quality = Math.Clamp(quality, 0, maxQualityAllowed);
     }
 
     public void Update()

@@ -11,7 +11,7 @@ public class AgedBrieUpdateQualityTest
     [Test]
     public void IncreasesQualityTheOlderItGets()
     {
-        Item agedBrie = new Item("Aged Brie", 1, 1, new DefaultQualityHandler(), new DefaultSellInHandler());
+        Item agedBrie = new Item("Aged Brie", 1, 1, new TheOlderTheBetterQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item>{agedBrie});
         
@@ -21,7 +21,7 @@ public class AgedBrieUpdateQualityTest
     [Test]
     public void NeverIncreasesOver50()
     {
-        Item agedBrie = new Item("Aged Brie", 1, 50, new DefaultQualityHandler(), new DefaultSellInHandler());
+        Item agedBrie = new Item("Aged Brie", 1, 50, new TheOlderTheBetterQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item>{agedBrie});
         
