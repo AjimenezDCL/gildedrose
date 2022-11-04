@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using GildedRoseCore;
+using GildedRoseCore.QualityHandlers;
+using GildedRoseCore.SellInHandlers;
 using NUnit.Framework;
 
 namespace GildedRoseTests;
@@ -9,7 +11,7 @@ public class BackstagePassesUpdateQualityTest
     [Test]
     public void IncreasesQualityAsTheSellingDayApproaches()
     {
-        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20);
+        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {backstagePass});
         
@@ -18,13 +20,13 @@ public class BackstagePassesUpdateQualityTest
     
     [Test]
     public void IncreasesByTwoIfThereAreBetween10And5DaysToTheSellInDay() {
-        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20);
+        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {backstagePass});
         
         Assert.AreEqual(22, backstagePass.GetQuality());
         
-        backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);
+        backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {backstagePass});
         
@@ -33,13 +35,13 @@ public class BackstagePassesUpdateQualityTest
     
     [Test]
     public void IncreasesByThreeIIncreasesByThreeIfThereAreBetween5And1DaysToTheSellInDay() {
-        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20);
+        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {backstagePass});
         
         Assert.AreEqual(23, backstagePass.GetQuality());
       
-        backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 1, 20);
+        backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 1, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {backstagePass});
         
@@ -48,7 +50,7 @@ public class BackstagePassesUpdateQualityTest
     
     [Test]
     public void QualityIsZeroWhenTheSoldDateHasPassed() {
-        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20);
+        Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {backstagePass});
         

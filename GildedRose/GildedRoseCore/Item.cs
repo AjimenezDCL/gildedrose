@@ -1,26 +1,24 @@
+using GildedRoseCore.QualityHandlers;
+using GildedRoseCore.SellInHandlers;
+
 namespace GildedRoseCore;
 
 public class Item
 {
-    public string name;
-    public int sellIn;
-    public int quality;
-    
-    public Item(string name, int sellIn, int quality)
-    {
-        SetName(name);
-        SetSellIn(sellIn);
-        SetQuality(quality);
-    }
+    public string name { get; }
+    private int sellIn;
+    private int quality;
+    private readonly IQualityHandler qualityHandler;
+    private readonly ISellInHandler sellInHandler;
 
-    public string GetName()
-    {
-        return name;
-    }
-
-    public void SetName(string name)
+    public Item(string name, int sellIn, int quality, IQualityHandler qualityHandler, ISellInHandler sellInHandler)
     {
         this.name = name;
+        SetSellIn(sellIn);
+        SetQuality(quality);
+
+        this.qualityHandler = qualityHandler;
+        this.sellInHandler = sellInHandler;
     }
 
     public int GetSellIn()
@@ -40,6 +38,12 @@ public class Item
 
     public void SetQuality(int quality)
     {
-        this.quality = quality;
+        this.quality = Math.Max(0, quality);
+    }
+
+    public void Update()
+    {
+        qualityHandler.UpdateQuality(this);
+        sellInHandler.UpdateSellIn(this);
     }
 }

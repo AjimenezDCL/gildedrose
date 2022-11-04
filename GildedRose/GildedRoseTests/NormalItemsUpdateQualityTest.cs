@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using GildedRoseCore;
+using GildedRoseCore.QualityHandlers;
+using GildedRoseCore.SellInHandlers;
 using NUnit.Framework;
 
 namespace GildedRoseTests;
@@ -8,7 +10,7 @@ public class NormalItemsUpdateQualityTest
 {
     [Test]
     public void ItemsDegradeQualityEachUpdate() {
-        Item item = new Item("some item", 1, 20);
+        Item item = new Item("some item", 1, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {item});
         
@@ -17,7 +19,7 @@ public class NormalItemsUpdateQualityTest
     
     [Test]
     public void WhenTheSellInDaWhenTheSellInDateHasPassedItemsDegradeQualityTwice() {
-        Item item = new Item("some item", 0, 20);
+        Item item = new Item("some item", 0, 20, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {item});
         
@@ -26,7 +28,7 @@ public class NormalItemsUpdateQualityTest
     
     [Test]
     public void TheQualityOfAnItemIsNeverNegative() {
-        Item item = new Item("some item", 0, 0);
+        Item item = new Item("some item", 0, 0, new DefaultQualityHandler(), new DefaultSellInHandler());
 
         GildedRose.UpdateQuality(new List<Item> {item});
         
